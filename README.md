@@ -1,50 +1,55 @@
-require-env-ts
+# require-env-ts
 
 Fail-fast, type-safe environment variable validation for Node.js (TypeScript-first).
 
 Lightweight. Zero dependencies. Backend-focused.
 
-✨ Features
+---
 
-Runtime validation of environment variables
+## ✨ Features
 
-Fully typed return values
+- Runtime validation of environment variables
+- Fully typed return values
+- Support for required variables
+- Support for optional variables
+- Support for default values
+- Enum validation helper
+- Zero dependencies
 
-Support for required variables
+---
 
-Support for optional variables
+## 📦 Installation
 
-Support for default values
-
-Enum validation helper
-
-Zero dependencies
-
-📦 Installation
+```bash
 npm install require-env-ts
+```
 
+If you're using a `.env` file:
 
-If you're using a .env file:
-
+```bash
 npm install dotenv
-
+```
 
 Then load it at the top of your entry file:
 
+```ts
 import "dotenv/config";
+```
 
-🚀 Usage
-1️⃣ requireEnv()
+---
+
+## 🚀 Usage
+
+### requireEnv()
 
 Validate required environment variables.
 
-Throws an error if:
+**Throws an error if:**
 
-A variable is missing
+- A variable is missing
+- A variable cannot be parsed into the expected type
 
-A variable cannot be parsed into the expected type
-
-Example
+```ts
 import { requireEnv } from "require-env-ts";
 
 const env = requireEnv({
@@ -53,16 +58,19 @@ const env = requireEnv({
   DEBUG: "boolean"
 });
 
-console.log(env.PORT);  // number
-console.log(env.DEBUG); // boolean
+console.log(env.PORT);
+console.log(env.DEBUG);
+```
 
-2️⃣ optionalEnv()
+---
+
+### optionalEnv()
 
 Validate environment variables but do not throw if missing.
 
-Missing variables simply return as undefined.
+Missing variables return `undefined`.
 
-Example
+```ts
 import { optionalEnv } from "require-env-ts";
 
 const opt = optionalEnv({
@@ -73,18 +81,24 @@ const opt = optionalEnv({
 if (opt.REDIS_URL) {
   console.log(opt.REDIS_URL);
 }
+```
 
-Returned Type
+Returned type:
+
+```ts
 {
   REDIS_URL?: string;
   TIMEOUT?: number;
 }
+```
 
-3️⃣ requireEnvWithDefaults()
+---
+
+### requireEnvWithDefaults()
 
 Validate environment variables and apply default values if missing.
 
-Example
+```ts
 import { requireEnvWithDefaults } from "require-env-ts";
 
 const env = requireEnvWithDefaults({
@@ -92,63 +106,73 @@ const env = requireEnvWithDefaults({
   DEBUG: ["boolean", false]
 });
 
-console.log(env.PORT);  // number
+console.log(env.PORT);
+```
 
-4️⃣ validateEnumEnv()
+---
+
+### validateEnumEnv()
 
 Ensure a variable is one of a predefined set of values.
 
 Useful for:
 
-NODE_ENV
+- `NODE_ENV`
+- `LOG_LEVEL`
+- `APP_MODE`
 
-LOG_LEVEL
-
-APP_MODE
-
-Example
+```ts
 import { validateEnumEnv } from "require-env-ts";
 
 const NODE_ENV = validateEnumEnv(
   "NODE_ENV",
   ["development", "production", "test"] as const
 );
+```
 
-Returned Type
+Returned type:
+
+```ts
 "development" | "production" | "test"
-
+```
 
 Fully typed union — not just string.
 
-🧠 Supported Types
+---
 
-The library supports:
+## 🧠 Supported Types
 
-"string"
+- `"string"`
+- `"number"`
+- `"boolean"`
 
-"number"
+All environment variables are parsed from `process.env`.
 
-"boolean"
+---
 
-All environment variables are parsed from process.env.
+## ⚠️ Important Notes
 
-⚠️ Important Notes
+- All values from `process.env` are strings.
+- Boolean values must be exactly `"true"` or `"false"`.
+- Numbers must be valid numeric strings.
+- `.env` loading is not handled by this library — use `dotenv`.
 
-All values from process.env are strings.
+---
 
-Boolean values must be exactly "true" or "false".
+## 🧪 Example .env File
 
-Numbers must be valid numeric strings.
-
-.env loading is not handled by this library — use dotenv.
-
-🧪 Example .env File
+```ini
 DB_URL=postgres://localhost
 PORT=3000
 DEBUG=true
 NODE_ENV=development
+```
 
-🏗 Recommended Pattern
+---
+
+## 🏗 Recommended Pattern
+
+```ts
 import "dotenv/config";
 import {
   requireEnv,
@@ -169,3 +193,4 @@ const NODE_ENV = validateEnumEnv(
   "NODE_ENV",
   ["development", "production", "test"] as const
 );
+```
