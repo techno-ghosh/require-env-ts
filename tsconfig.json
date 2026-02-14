@@ -9,9 +9,9 @@
         "module": "node16",
         "declaration": true,
         "isolatedModules": true,
-        "noEmit": true,
+        "noEmit": false,
         "outDir": "dist"
     },
     "include": ["src"],
-    "exclude": ["node_modules"]
+    "exclude": ["node_modules","src/test.ts"]
 }

@@ -1,5 +1,5 @@
 {
-  "name": "require-env",
+  "name": "require-env-ts",
   "version": "1.0.0",
   "description": "Package to help check key value pairs in the .env file.",
   "keywords": [
@@ -17,16 +17,18 @@
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "prepublishOnly": "npm run build",
     "dev": "nodemon --watch src --exec ts-node src/test.ts"
   },
   "devDependencies": {
     "nodemon": "^3.1.11",
     "ts-node": "^10.9.2",
     "tsup": "^8.5.1",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "dotenv": "^17.3.1"
   },
   "dependencies": {
-    "dotenv": "^17.3.1"
-  }
+  },
+  "files": ["dist", "README.md", "LICENSE"]
 }

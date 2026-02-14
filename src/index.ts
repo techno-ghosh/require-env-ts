@@ -1,2 +1,2 @@
-export * from './functions';
+export { requireEnv, OptionalEnv, requireEnvWithDefaults, validateEnumEnv } from "./functions";
 export * from './types';
