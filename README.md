@@ -57,12 +57,7 @@ const env = requireEnv({
 console.log(env.PORT);  // number
 console.log(env.DEBUG); // boolean
 
-Behavior
-Case	                Result
-Missing variable	    ❌ Throws error
-Invalid number	        ❌ Throws error
-Invalid boolean	        ❌ Throws error
-Valid values	        ✅ Returns typed object
+
 
 2️⃣ optionalEnv()
 
@@ -104,11 +99,6 @@ const env = requireEnvWithDefaults({
 
 console.log(env.PORT);  // number
 
-Behavior
-Case	            Result
-Missing variable	✅ Uses default
-Invalid type	    ❌ Throws error
-Valid value	        ✅ Parsed value
 
 
 4️⃣ validateEnumEnv()
@@ -131,11 +121,7 @@ const NODE_ENV = validateEnumEnv(
   ["development", "production", "test"] as const
 );
 
-Behavior
-Case	            Result
-Missing variable	❌ Throws error
-Invalid value	    ❌ Throws error
-Allowed value	    ✅ Returns typed union
+
 Returned Type
 "development" | "production" | "test"
 
