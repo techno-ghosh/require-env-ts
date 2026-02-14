@@ -4,23 +4,23 @@ Fail-fast, type-safe environment variable validation for Node.js (TypeScript-fir
 
 Lightweight. Zero dependencies. Backend-focused.
 
-Features
+✨ Features
 
--> Runtime validation of environment variables
+Runtime validation of environment variables
 
--> Fully typed return values
+Fully typed return values
 
--> Support for required variables
+Support for required variables
 
--> Support for optional variables
+Support for optional variables
 
--> Support for default values
+Support for default values
 
--> Enum validation helper
+Enum validation helper
 
--> Zero dependencies
+Zero dependencies
 
-Installation
+📦 Installation
 npm install require-env-ts
 
 
@@ -33,8 +33,7 @@ Then load it at the top of your entry file:
 
 import "dotenv/config";
 
-Usage
-
+🚀 Usage
 1️⃣ requireEnv()
 
 Validate required environment variables.
@@ -56,8 +55,6 @@ const env = requireEnv({
 
 console.log(env.PORT);  // number
 console.log(env.DEBUG); // boolean
-
-
 
 2️⃣ optionalEnv()
 
@@ -83,8 +80,6 @@ Returned Type
   TIMEOUT?: number;
 }
 
-
-
 3️⃣ requireEnvWithDefaults()
 
 Validate environment variables and apply default values if missing.
@@ -98,8 +93,6 @@ const env = requireEnvWithDefaults({
 });
 
 console.log(env.PORT);  // number
-
-
 
 4️⃣ validateEnumEnv()
 
@@ -120,7 +113,6 @@ const NODE_ENV = validateEnumEnv(
   "NODE_ENV",
   ["development", "production", "test"] as const
 );
-
 
 Returned Type
 "development" | "production" | "test"
@@ -144,11 +136,7 @@ All environment variables are parsed from process.env.
 
 All values from process.env are strings.
 
-Boolean values must be exactly:
-
-"true"
-
-"false"
+Boolean values must be exactly "true" or "false".
 
 Numbers must be valid numeric strings.
 
